@@ -182,12 +182,12 @@ flow.dataset.built='1';
 const BLUE='#2E86C1',RED='#C22620';
 const EDGES=[
  ['n1','n2','f'],['n2','n3','f'],
- ['n3','n41','f','Yes'],['n3','n42','f'],
+ ['n3','n41','f','Yes',{labelAtBend:true}],['n3','n42','f'],
  ['n42','n5','f'],
  ['n5','n6','f'],
- ['n6','n7','f','Yes'],
+ ['n6','n7','f','Yes',{labelAtBend:true}],
  ['n7','n8','f'],
- ['n8','n9','f','Yes'],
+ ['n8','n9','f','Yes',{labelAtBend:true}],
  ['n9','n10','f'],
  ['n10','n11k','f','Yes',{fromSide:'left'}],['n10','n11b','f',null,{fromSide:'left'}],
  ['n10','nhuy','fd','No'],
@@ -236,7 +236,7 @@ function draw(){
       const my=Math.max(sy+14,ty2-24);
       const d=Math.abs(sx-tx)<1?`M${sx},${sy} L${tx},${ty2-2}`:`M${sx},${sy} L${sx},${my} L${tx},${my} L${tx},${ty2-2}`;
       path(d,color);
-      if(label) lbl(id,sx+6,ty==='fd'?sy+24:sy+4,label,color);
+      if(label) lbl(id,sx+6,(opts&&opts.labelAtBend)?my-8:(ty==='fd'?sy+24:sy+4),label,color);
     }else if(ty==='loop'){
       const chan=s.x-30, top=s.y-16;
       path(`M${s.x},${s.cy} L${chan},${s.cy} L${chan},${top} L${s.cx},${top} L${s.cx},${s.y-2}`,RED);
