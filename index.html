@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quy trình sản phẩm R&amp;D — Sơ đồ swimlane</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--red:#C22620;--gold:#D4AF37;--ink:#1A1A1A;--gray:#595959;--cream:#FBF6E4;
+  --orange:#E07B00;--blue:#2E86C1;--rectbd:#9A9A9A;--rectbg:#F2F2F2;--line:#D9C9A0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Aptos Display','Segoe UI',Arial,sans-serif;color:var(--ink);background:#fff;padding:22px}
+h1.title{font-family:'Oswald',sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;color:var(--ink);
+  background:var(--cream);border-left:8px solid var(--red);padding:12px 18px;margin-bottom:2px}
+.sub{font-size:12.5px;color:var(--gray);padding:0 18px 12px;background:var(--cream);margin-bottom:14px}
+.scroll{overflow-x:auto;border:1.5px solid var(--orange)}
+.flow{position:relative;display:grid;min-width:1397px;
+  grid-template-columns:34px repeat(4,minmax(200px,1fr)) 300px 88px 175px}
+.flow .hd{background:var(--cream);font-family:'Oswald',sans-serif;font-weight:600;font-size:12.5px;text-transform:uppercase;
+  text-align:center;padding:11px 5px;border-right:1px solid var(--orange);border-bottom:2px solid var(--orange);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);line-height:1.25}
+.flow .hd.gut{padding:0}
+.lc{border-right:1px solid var(--line);min-height:118px;position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;padding:16px 8px;z-index:2}
+.lc.mid{background:rgba(212,175,55,.06)}
+.gut-cell{border-right:1px solid var(--line);position:relative;z-index:2}
+.mota,.tg,.bm{border-right:1px solid var(--orange);border-bottom:1px solid var(--orange);padding:9px 12px;
+  font-size:12.2px;line-height:1.5;color:var(--gray);background:#fff;z-index:2;position:relative}
+.mota b{color:var(--ink)}
+.mota .re{color:var(--red);font-weight:600}
+.tg{text-align:center;font-family:'Oswald',sans-serif;color:var(--ink);font-weight:500;font-size:12px}
+.bm{font-size:11.6px}
+.bm b{color:var(--ink)}
+.shape{background:#fff;text-align:center;font-size:11px;font-weight:600;line-height:1.25;color:var(--ink);position:relative}
+.oval{border:2px solid var(--orange);border-radius:22px;padding:9px 10px;min-width:120px;background:#fff}
+.rect{border:1.5px solid var(--rectbd);background:var(--rectbg);padding:9px 10px;min-width:122px}
+.diaWrap{width:120px;height:112px;position:relative;display:flex;align-items:center;justify-content:center}
+.dia{position:absolute;top:50%;left:50%;width:80px;height:80px;transform:translate(-50%,-50%) rotate(45deg);border:2px solid var(--orange);background:#FFF7EC}
+.diaWrap span{position:relative;z-index:1;font-size:10.5px;font-weight:600;width:116px;text-align:center}
+.oval.end{border-color:var(--red);color:var(--red)}
+#nhuy{margin-top:42px}
+svg.wire{position:absolute;top:0;left:0;z-index:1;pointer-events:none;overflow:visible}
+.note14{font-size:12px;color:var(--gray);margin:14px 2px 4px;font-style:italic}
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin:14px 2px;font-size:11.5px;color:var(--gray)}
+.legend i{font-style:normal;display:inline-flex;align-items:center;gap:6px}
+.legend .sw{width:26px;height:0;border-top:2px solid}
+.luuy-h{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin:24px 2px 8px}
+.luuy-h span{color:var(--red)}
+.prin{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.pr{border-left:5px solid var(--gold);background:var(--cream);padding:13px 16px}
+.pr .no{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;color:var(--red);margin-bottom:5px}
+.pr h3{font-size:12.5px;font-weight:600;text-transform:uppercase;margin-bottom:5px}
+.pr p{font-size:12px;color:var(--gray);line-height:1.55}
+.pr p b{color:var(--red)}
+.bar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1.5px solid var(--gold);padding:9px 2px;margin-bottom:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bar button{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;font-weight:600;background:var(--red);color:#fff;border:none;padding:8px 15px;cursor:pointer;letter-spacing:.05em}
+.bar button.alt{background:var(--gold);color:var(--ink)}
+.bar .hint{font-size:11.5px;color:var(--gray)}
+[contenteditable="true"]{cursor:text}
+[contenteditable="true"]:hover{background:#FFFDF3}
+[contenteditable="true"]:focus{outline:2px solid var(--gold);outline-offset:1px;background:#FFF8E6}
+.wlabel{position:absolute;z-index:6;font-family:'Oswald',sans-serif;font-weight:700;font-size:11px;
+  background:#fff;padding:1px 5px;border:1px solid transparent;border-radius:3px;cursor:grab;user-select:none;touch-action:none;line-height:1.2}
+.wlabel:hover{border-color:currentColor}
+.wlabel:active{cursor:grabbing}
+@media print{.bar{display:none}[contenteditable]:hover{background:none}body{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:0}.scroll{overflow:visible;border:none}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <button class="alt" onclick="draw()">↻ Vẽ lại mũi tên</button>
+  <button onclick="downloadEdited()">💾 Tải bản đã sửa</button>
+  <span class="hint">Mẹo: bấm đúp (hoặc bấm) vào bất kỳ chữ nào để sửa trực tiếp. Sửa xong bấm "Vẽ lại mũi tên" cho thẳng, rồi "Tải bản đã sửa" để lưu file.</span>
+</div>
+
+<h1 class="title" contenteditable="true">Quy trình sản phẩm R&amp;D</h1>
+<div class="sub">Sơ đồ swimlane · Làn = bộ phận (BTV · QL · TK · KT · MKT) · Hình thoi = điểm duyệt · Mũi tên xanh = luồng chính, đỏ = trả về/không đạt · Số bước trong ô sơ đồ khớp với cột Mô tả chi tiết.</div>
+
+<div class="scroll"><div class="flow" id="flow" data-built="1">
+  <div class="hd gut"></div>
+  <div class="hd">BTV<br>Biên tập/R&amp;D</div>
+  <div class="hd">TK<br>Thiết kế</div>
+  <div class="hd">KT<br>Kế toán</div>
+  <div class="hd">MKT</div>
+  <div class="hd">Mô tả chi tiết</div>
+  <div class="hd">Thời gian</div>
+  <div class="hd">Biểu mẫu / Đầu ra</div>
+<div class="gut-cell"></div><div class="lc"><div class="shape oval " id="n1" contenteditable="true">1. Đề xuất SP mới</div></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>1.</b> Bộ phận R&amp;D tìm kiếm, phân tích và đề xuất ý tưởng sản phẩm mới.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true" style="grid-row: span 2;"><b>1+2.</b> File Nghiên cứu SP (Larkdocs/Larksheet).<br>Cần đủ: ảnh SP, nguồn, SL đã bán, giá bán, lý do đề xuất, feedback KH, phân tích cấu tạo–tính năng–lợi ích, đối tượng – khách hàng, đối thủ, hướng triển khai.</div><div class="gut-cell"></div><div class="lc"><div class="shape rect" id="n2" contenteditable="true">2. Nhập file nghiên cứu</div></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>2.</b> Nhập thông tin SP lên file "Nghiên cứu sản phẩm": điền tên SP mẫu và file nghiên cứu vào ô "Link file nghiên cứu".</div><div class="tg" contenteditable="true">…</div><div class="gut-cell"></div><div class="lc"><div class="diaWrap" id="n3"><div class="dia"></div><span contenteditable="true">3. QL duyệt?</span></div></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>3.</b> Quản lý xem xét &amp; duyệt đề xuất SP mới:<br>• <span class="re">Không duyệt → quay lại bước 1.</span><br>• Được duyệt → triển khai làm nội dung SP và điền bảng "Qly quy trình RND".</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>3.</b> Bảng Qly quy trình RND</div><div class="gut-cell"></div><div class="lc"><div class="shape rect" id="n41" contenteditable="true">4.1 Link ND test + deadline</div></div><div class="lc"><div class="shape rect" id="n42" contenteditable="true">4.2 Link TK+Deadline TK</div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>4.</b> Làm nội dung SP test (BT &amp; TK <b>SONG SONG</b>):<br><b>4.1 (BT)</b> Thêm mới SP ở bảng "Qly công việc RND", gắn link nội dung test và điền <b>deadline ND test</b>.<br><b>4.2 (TK)</b> Nhận phân công, vào file tiếp nhận công việc và điền <b>deadline TK và gắn link TK test</b>.<br><i>Lưu ý:</i> bản TK test đi kèm ladi SP để gửi MKT test.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>4.</b> Bảng Qly công việc RND; Ladipage test</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"><div class="shape rect" id="n5" contenteditable="true">5. Báo demo nhóm RND</div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>5.</b> Sau khi xong file TK test và ladi, TK báo lên nhóm RND để QL &amp; BT kiểm tra, đánh giá điểm cần sửa và chỉnh sửa lại (nếu cần).</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>5.</b> Bản demo TK + Ladipage</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"><div class="diaWrap" id="n6"><div class="dia"></div><span contenteditable="true">6. Duyệt demo?</span></div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>6.</b> Sau khi sửa xong và được duyệt, TK cập nhập link file chốt và đăng file demo chốt lên bảng "Qly quy trình RND"<br></div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>6.</b> File demo chốt</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"></div><div class="lc"><div class="shape rect" id="n7" contenteditable="true">7. In test + khảo giá</div></div><div class="lc"></div><div class="mota" contenteditable="true"><b>7.</b> In test và khảo giá: Kế toán đặt bản in thử và khảo giá các bên nhà in.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>7.</b> Báo giá in test</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"></div><div class="lc"><div class="diaWrap" id="n8"><div class="dia"></div><span contenteditable="true">8. Chốt nhà in?</span></div></div><div class="lc"></div><div class="mota" contenteditable="true"><b>8.</b> Gửi báo giá cho QL và bản in test cho RND đánh giá:<br>• KT chuyển SP in test qua RND; RND đánh giá, điều chỉnh (màu sắc, chất liệu…) chọn mẫu nhà in đạt nhất.<br>• KT làm giá với nhà in được chọn, gửi báo giá QL duyệt; QL + RND thống nhất chốt nhà in.<br>• <span class="re">Không duyệt → quay lại bước 8, tìm đối tác mới.</span> Được duyệt → KT gửi SP in test qua MKT.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>8.</b> Báo giá + mẫu in test</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"></div><div class="lc"><div class="shape rect" id="n9" contenteditable="true">9. Gửi in test → MKT</div></div><div class="lc"></div><div class="mota" contenteditable="true"><b>9.</b> Gửi sản phẩm in test qua bộ phận MKT để test sản phẩm.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>9.</b>&nbsp;SP test</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"></div><div class="lc"></div><div class="lc"><div class="diaWrap" id="n10"><div class="dia"></div><span contenteditable="true">10. MKT test đạt?</span></div><div class="shape oval end" id="nhuy" contenteditable="true">Hủy mẫu SP</div></div><div class="mota" contenteditable="true"><b>10.</b> MKT nhận SP test (từ KT) và ladipage (từ TK), triển khai quảng cáo SP mới:<br>• <span class="re">Không đạt → hủy bỏ mẫu SP.</span><br>• Có tín hiệu tốt → chuyển bước tiếp theo.<br><i>Lưu ý:</i> trong lúc chờ MKT test, RND gối đầu nghiên cứu SP mới khác.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>10.</b> Ladipage; Báo cáo test MKT</div><div class="gut-cell"></div><div class="lc"><div class="shape rect" id="n11b" contenteditable="true">11.2–11.3 Xin XB + hoàn thiện ND</div></div><div class="lc"></div><div class="lc"><div class="shape rect" id="n11k" contenteditable="true">11.1 Chốt HĐ nhà in</div></div><div class="lc"></div><div class="mota" contenteditable="true"><b>11.</b> Hoàn thiện SP &amp; xin xuất bản:<br><b>11.1 (KT)</b> Làm giá &amp; chốt HĐ nhà in (giá in + phí XB); chốt xong tạo nhóm để BT, TK, nhà in làm việc.<br><b>11.2 (BT)</b> Điền form xin XB, phụ trách làm việc &amp; trao đổi thông tin SP với nhà in.<br><b>11.3 (BT)</b> Hoàn thiện full nội dung SP (phối hợp TK, rà soát song song).</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>11.</b> Hợp đồng nhà in; Form xin XB</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"><div class="shape rect" id="n12" contenteditable="true">12. TK hoàn chỉnh</div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>12.</b> TK hoàn thiện (song song nội dung BT) và đăng TK hoàn chỉnh lên file "Quy trình RND".<br><i>Lưu ý:</i> tải file TK lên <b>CÙNG đường link</b> đã đăng cho file test.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>12.</b> File TK hoàn chỉnh</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"><div class="shape rect" id="n13" contenteditable="true">13. Gửi nhà in xin XB</div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>13.</b> Gửi file TK cho nhà in xin XB: sau khi file SP hoàn thiện được duyệt, TK gửi file cho nhà in để xin xuất bản.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>13.</b> File gửi nhà in</div><div class="gut-cell"></div><div class="lc"></div><div class="lc"><div class="shape rect" id="n15" contenteditable="true">14. Thêm thông tin XB</div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>14.</b> Thêm thông tin XB vào SP: sau khi có giấy phép XB, TK lấy và thêm thông tin xuất bản (NXB, chủ biên, mã vạch…) vào sản phẩm.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>14.</b> Giấy phép XB; thông tin XB</div><div class="gut-cell"></div><div class="lc mid" style="grid-column: span 2;"><div class="shape rect" id="n16" contenteditable="true">15. (TK+BT) Chốt file in cuối</div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>15.</b> Chốt file in cuối cùng: TK &amp; BT rà soát nội dung lần cuối trước khi in. <br>File in duyệt → TK gửi file chất lượng cao trong nhóm nhà in để in, đồng thời up "File in hoàn thiện" ở bảng "Qly Quy trình RND".</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>15.</b> File in hoàn thiện</div><div class="gut-cell"></div><div class="lc mid" style="grid-column: span 2;"><div class="shape rect" id="n17" contenteditable="true">16. (TK+BT) Xin quyền tác giả</div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>16.</b> <b>TK &amp; BT cùng</b> tải thiết kế và điền thông tin lên file xin quyền tác giả.<br><i>Lưu ý:</i> thay đổi SP sau hoàn thiện ảnh hưởng bản quyền → báo HCNS (người làm hồ sơ bản quyền).</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>16.</b> File xin quyền tác giả</div><div class="gut-cell"></div><div class="lc mid" style="grid-column: span 2;"><div class="shape oval end" id="n18" contenteditable="true">17. (TK+BT) Bàn giao File chốt → TK Admin (Canva) — Kết thúc</div></div><div class="lc"></div><div class="lc"></div><div class="mota" contenteditable="true"><b>17.</b> <b>TK &amp; BT</b> bàn giao File chốt vào thư mục "BÀN GIAO FILE CHỐT" và chuyển quyền sở hữu file trên Canva sang <b>TK Admin</b> → <b>Kết thúc chu kỳ</b>, chuyển sang chu kỳ sản phẩm mới.<br><i>Lưu ý:</i> tái bản → TK/BT báo HCNS cấp lại file.</div><div class="tg" contenteditable="true">…</div><div class="bm" contenteditable="true"><b>17.</b> Folder "BÀN GIAO FILE CHỐT" (Canva)</div><div id="lb_n3_n41" class="wlabel" data-moved="1" style="color: rgb(46, 134, 193); left: 255.075px; top: 445.367px;">Yes</div><div id="lb_n6_n7" class="wlabel" data-moved="1" style="color: rgb(46, 134, 193); left: 488.578px; top: 838.388px;">Yes</div><div id="lb_n8_n9" class="wlabel" data-moved="1" style="color: rgb(46, 134, 193); left: 621.247px; top: 1133.44px;">Yes</div><div id="lb_n10_n11k" class="wlabel" data-moved="1" style="color: rgb(46, 134, 193); left: 727.43px; top: 1314.99px;">Yes</div><div id="lb_n10_nhuy" class="wlabel" data-moved="0" style="color: rgb(194, 38, 32); left: 859.763px; top: 1415.16px;">No</div><div id="lb_n3_n1" class="wlabel" data-moved="1" style="color: rgb(194, 38, 32); left: 44.5756px; top: 208.537px;">No</div><div id="lb_n6_n5" class="wlabel" data-moved="1" style="color: rgb(194, 38, 32); left: 262.935px; top: 697.392px;">No</div><div id="lb_n8_n8" class="wlabel" data-moved="1" style="color: rgb(194, 38, 32); left: 495.914px; top: 1007.77px;">No</div></div></div>
+
+<div class="note14">(*) Đã đánh số liên tục 1–17. · Cột "Thời gian" để trống (…) chờ chị điền định mức. · Cột "Biểu mẫu" em suy ra từ mô tả — chị chỉnh nếu cần.</div>
+
+<div class="legend">
+  <i><span class="sw" style="border-color:var(--blue)"></span> Luồng chính</i>
+  <i><span class="sw" style="border-color:var(--red)"></span> Trả về / Không đạt</i>
+  <i><span style="display:inline-block;width:16px;height:16px;border:2px solid var(--orange);border-radius:8px"></span> Bắt đầu/Kết thúc</i>
+  <i><span style="display:inline-block;width:15px;height:15px;background:#FFF7EC;border:2px solid var(--orange);transform:rotate(45deg)"></span> Điểm duyệt</i>
+  <i><span style="display:inline-block;width:16px;height:14px;background:var(--rectbg);border:1.5px solid var(--rectbd)"></span> Bước xử lý</i>
+</div>
+
+<div class="luuy-h">Lưu ý <span>quan trọng</span></div>
+<div class="prin">
+  <div class="pr"><div class="no">01</div><h3>Bảng "Nghiên cứu SP" — chỉ BTV</h3><p>File đủ: ảnh SP, nguồn, số lượng đã bán, giá bán, lý do đề xuất, feedback khách, phân tích cấu tạo–tính năng–lợi ích, đối tượng, đối thủ, hướng triển khai… BTV làm qua Larkdocs và <b>SHARE quyền quản lý cho TK Admin</b>.</p></div>
+  <div class="pr"><div class="no">02</div><h3>1 "File chốt" duy nhất trên Canva</h3><p>Thiết kế mỗi công đoạn (test/full) <b>gộp thành 1 FILE CHỐT</b>, lưu 1 folder Canva. Đặt tên: <b>Mã SP – Nội dung file – Tên khác – NXB</b>.</p></div>
+  <div class="pr"><div class="no">03</div><h3>Bàn giao &amp; chuyển quyền</h3><p>File in chốt + xong bản quyền → <b>Thiết kế &amp; Biên tập (TK &amp; BT) cùng bàn giao vào "BÀN GIAO FILE CHỐT"</b> và <b>chuyển quyền sở hữu sang TK Admin</b>. Tái bản → TK/BT báo HCNS cấp lại file.</p></div>
+</div>
+
+<script>
+const LANE={BTV:0,TK:1,KT:2,MKT:3};
+function shapeHTML(n){
+  if(n.shape==='oval') return `<div class="shape oval ${n.end?'end':''}" id="${n.id}" contenteditable="true">${n.t}</div>`;
+  if(n.shape==='rect') return `<div class="shape rect" id="${n.id}" contenteditable="true">${n.t}</div>`;
+  return `<div class="diaWrap" id="${n.id}"><div class="dia"></div><span contenteditable="true">${n.t}</span></div>`;
+}
+const ROWS=[
+ {n:[{id:'n1',lane:'BTV',shape:'oval',t:'1. Đề xuất SP mới'}],
+  mota:'<b>1.</b> Bộ phận R&D tìm kiếm, phân tích và đề xuất ý tưởng sản phẩm mới.', tg:'…', bmSpan:2, bm:'<b>1+2.</b> File Nghiên cứu SP (Larkdocs/Larksheet).<br>Cần đủ: ảnh SP, nguồn, SL đã bán, giá bán, lý do đề xuất, feedback KH, phân tích cấu tạo–tính năng–lợi ích, đối tượng – khách hàng, đối thủ, hướng triển khai.'},
+ {n:[{id:'n2',lane:'BTV',shape:'rect',t:'2. Nhập file nghiên cứu'}],
+  mota:'<b>2.</b> Nhập thông tin SP lên file "Nghiên cứu sản phẩm": điền tên SP mẫu và file nghiên cứu vào ô "Link file nghiên cứu".', tg:'…', bmSkip:true, bm:''},
+ {n:[{id:'n3',lane:'BTV',shape:'dia',t:'3. QL duyệt?'}],
+  mota:'<b>3.</b> Quản lý xem xét & duyệt đề xuất SP mới:<br>• <span class="re">Không duyệt → quay lại bước 1.</span><br>• Được duyệt → triển khai làm nội dung SP và điền bảng "Qly quy trình RND".', tg:'…', bm:'<b>3.</b> Bảng Qly quy trình RND'},
+ {n:[{id:'n41',lane:'BTV',shape:'rect',t:'4.1 ND test + deadline'},{id:'n42',lane:'TK',shape:'rect',t:'4.2 Deadline TK'}],
+  mota:'<b>4.</b> Làm nội dung SP test (BT & TK <b>SONG SONG</b>):<br><b>4.1 (BT)</b> Thêm mới SP ở bảng "Qly công việc RND", gắn link nội dung test và điền <b>deadline ND test</b>.<br><b>4.2 (TK)</b> Nhận phân công, vào file tiếp nhận công việc và điền <b>deadline TK</b>.<br><i>Lưu ý:</i> bản TK test đi kèm ladi SP để gửi MKT test.', tg:'…', bm:'<b>4.</b> Bảng Qly công việc RND; Ladipage test'},
+ {n:[{id:'n5',lane:'TK',shape:'rect',t:'5. Đăng demo nhóm RND'}],
+  mota:'<b>5.</b> Sau khi xong file TK test và ladi, TK đăng bản demo lên nhóm RND để QL & BT kiểm tra, đánh giá điểm cần sửa và chỉnh sửa lại (nếu cần).', tg:'…', bm:'<b>5.</b> Bản demo TK + Ladipage'},
+ {n:[{id:'n6',lane:'TK',shape:'dia',t:'6. Duyệt demo?'}],
+  mota:'<b>6.</b> Sau khi sửa xong ở B5, TK đăng file demo chốt lên bảng "Qly quy trình RND":<br>• <span class="re">Không đạt → quay lại bước thiết kế (B5).</span><br>• Được duyệt → sang bước in test.', tg:'…', bm:'<b>6.</b> File demo chốt'},
+ {n:[{id:'n7',lane:'KT',shape:'rect',t:'7. In test + khảo giá'}],
+  mota:'<b>7.</b> In test và khảo giá: Kế toán đặt bản in thử và khảo giá các bên nhà in.', tg:'…', bm:'<b>7.</b> Báo giá in test'},
+ {n:[{id:'n8',lane:'KT',shape:'dia',t:'8. Chốt nhà in?'}],
+  mota:'<b>8.</b> Gửi báo giá cho QL và bản in test cho RND đánh giá:<br>• KT chuyển SP in test qua RND; RND đánh giá, điều chỉnh (màu sắc, chất liệu…) chọn mẫu nhà in đạt nhất.<br>• KT làm giá với nhà in được chọn, gửi báo giá QL duyệt; QL + RND thống nhất chốt nhà in.<br>• <span class="re">Không duyệt → quay lại bước 8, tìm đối tác mới.</span> Được duyệt → KT gửi SP in test qua MKT.', tg:'…', bm:'<b>8.</b> Báo giá + mẫu in test'},
+ {n:[{id:'n9',lane:'KT',shape:'rect',t:'9. Gửi in test → MKT'}],
+  mota:'<b>9.</b> Gửi sản phẩm in test qua bộ phận MKT để test sản phẩm.', tg:'…', bm:'<b>9.</b> BB bàn giao SP test'},
+ {n:[{id:'n10',lane:'MKT',shape:'dia',t:'10. MKT test đạt?'},{id:'nhuy',lane:'MKT',shape:'oval',end:true,t:'Hủy mẫu SP'}],
+  mota:'<b>10.</b> MKT nhận SP test (từ KT) và ladipage (từ TK), triển khai quảng cáo SP mới:<br>• <span class="re">Không đạt → hủy bỏ mẫu SP.</span><br>• Có tín hiệu tốt → chuyển bước tiếp theo.<br><i>Lưu ý:</i> trong lúc chờ MKT test, RND gối đầu nghiên cứu SP mới khác.', tg:'…', bm:'<b>10.</b> Ladipage; Báo cáo test MKT'},
+ {n:[{id:'n11b',lane:'BTV',shape:'rect',t:'11.2–11.3 Xin XB + hoàn thiện ND'},{id:'n11k',lane:'KT',shape:'rect',t:'11.1 Chốt HĐ nhà in'}],
+  mota:'<b>11.</b> Hoàn thiện SP & xin xuất bản:<br><b>11.1 (KT)</b> Làm giá & chốt HĐ nhà in (giá in + phí XB); chốt xong tạo nhóm để BT, TK, nhà in làm việc.<br><b>11.2 (BT)</b> Điền form xin XB, phụ trách làm việc & trao đổi thông tin SP với nhà in.<br><b>11.3 (BT)</b> Hoàn thiện full nội dung SP (phối hợp TK, rà soát song song).', tg:'…', bm:'<b>11.</b> Hợp đồng nhà in; Form xin XB'},
+ {n:[{id:'n12',lane:'TK',shape:'rect',t:'12. TK hoàn chỉnh'}],
+  mota:'<b>12.</b> TK hoàn thiện (song song nội dung BT) và đăng TK hoàn chỉnh lên file "Quy trình RND".<br><i>Lưu ý:</i> tải file TK lên <b>CÙNG đường link</b> đã đăng cho file test.', tg:'…', bm:'<b>12.</b> File TK hoàn chỉnh'},
+ {n:[{id:'n13',lane:'TK',shape:'rect',t:'13. Gửi nhà in xin XB'}],
+  mota:'<b>13.</b> Gửi file TK cho nhà in xin XB: sau khi file SP hoàn thiện được duyệt, TK gửi file cho nhà in để xin xuất bản.', tg:'…', bm:'<b>13.</b> File gửi nhà in'},
+ {n:[{id:'n15',lane:'TK',shape:'rect',t:'14. Thêm thông tin XB'}],
+  mota:'<b>14.</b> Thêm thông tin XB vào SP: sau khi có giấy phép XB, TK lấy và thêm thông tin xuất bản (NXB, chủ biên, mã vạch…) vào sản phẩm.', tg:'…', bm:'<b>14.</b> Giấy phép XB; thông tin XB'},
+ {n:[{id:'n16',mid:true,shape:'rect',t:'15. (TK+BT) Chốt file in cuối'}],
+  mota:'<b>15.</b> Chốt file in cuối cùng: TK & BT rà soát nội dung lần cuối trước khi in. File in duyệt → TK gửi file chất lượng cao trong nhóm nhà in để in, đồng thời up "File in hoàn thiện" ở bảng "Qly Quy trình RND".', tg:'…', bm:'<b>15.</b> File in hoàn thiện'},
+ {n:[{id:'n17',mid:true,shape:'rect',t:'16. (TK+BT) Xin quyền tác giả'}],
+  mota:'<b>16.</b> <b>TK & BT cùng</b> tải thiết kế và điền thông tin lên file xin quyền tác giả.<br><i>Lưu ý:</i> thay đổi SP sau hoàn thiện ảnh hưởng bản quyền → báo HCNS (người làm hồ sơ bản quyền).', tg:'…', bm:'<b>16.</b> File xin quyền tác giả'},
+ {n:[{id:'n18',mid:true,shape:'oval',end:true,t:'17. (TK+BT) Bàn giao File chốt → TK Admin (Canva) — Kết thúc'}],
+  mota:'<b>17.</b> <b>TK & BT</b> bàn giao File chốt vào thư mục "BÀN GIAO FILE CHỐT" và chuyển quyền sở hữu file trên Canva sang <b>TK Admin</b> → <b>Kết thúc chu kỳ</b>, chuyển sang chu kỳ sản phẩm mới.<br><i>Lưu ý:</i> tái bản → TK/BT báo HCNS cấp lại file.', tg:'…', bm:'<b>17.</b> Folder "BÀN GIAO FILE CHỐT" (Canva)'},
+];
+const flow=document.getElementById('flow');
+if(!flow.dataset.built){
+ROWS.forEach(r=>{
+  const gut=document.createElement('div');gut.className='gut-cell';flow.appendChild(gut);
+  const mid=r.n.find(x=>x.mid);
+  if(mid){
+    const c=document.createElement('div');c.className='lc mid';c.style.gridColumn='span 2';
+    c.insertAdjacentHTML('beforeend',shapeHTML(mid));flow.appendChild(c);
+    for(let li=2;li<4;li++){
+      const cc=document.createElement('div');cc.className='lc';
+      r.n.filter(x=>!x.mid&&LANE[x.lane]===li).forEach(x=>cc.insertAdjacentHTML('beforeend',shapeHTML(x)));
+      flow.appendChild(cc);
+    }
+  }else{
+    for(let li=0;li<4;li++){
+      const c=document.createElement('div');c.className='lc';
+      r.n.filter(x=>LANE[x.lane]===li).forEach(x=>c.insertAdjacentHTML('beforeend',shapeHTML(x)));
+      flow.appendChild(c);
+    }
+  }
+  const m=document.createElement('div');m.className='mota';m.innerHTML=r.mota;m.contentEditable='true';flow.appendChild(m);
+  const t=document.createElement('div');t.className='tg';t.textContent=r.tg;t.contentEditable='true';flow.appendChild(t);
+  if(!r.bmSkip){
+    const b=document.createElement('div');b.className='bm';b.innerHTML=r.bm;b.contentEditable='true';
+    if(r.bmSpan)b.style.gridRow='span '+r.bmSpan;
+    flow.appendChild(b);
+  }
+});
+flow.dataset.built='1';
+}
+
+const BLUE='#2E86C1',RED='#C22620';
+const EDGES=[
+ ['n1','n2','f'],['n2','n3','f'],
+ ['n3','n41','f','Yes'],['n3','n42','f'],
+ ['n42','n5','f'],
+ ['n5','n6','f'],
+ ['n6','n7','f','Yes'],
+ ['n7','n8','f'],
+ ['n8','n9','f','Yes'],
+ ['n9','n10','f'],
+ ['n10','n11k','f','Yes',{fromSide:'left'}],['n10','n11b','f',null,{fromSide:'left'}],
+ ['n10','nhuy','fd','No'],
+ ['n11b','n12','f'],
+ ['n12','n13','f'],['n13','n15','f'],['n15','n16','f'],['n16','n17','f'],
+ ['n17','n18','f'],
+ ['n3','n1','r','No'],['n6','n5','r','No'],['n8','n8','loop','No'],
+];
+function draw(){
+  const old=flow.querySelector('svg.wire');if(old)old.remove();
+  const fr=flow.getBoundingClientRect();
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('class','wire');
+  svg.setAttribute('width',flow.scrollWidth);svg.setAttribute('height',flow.scrollHeight);
+  svg.innerHTML=`<defs>
+    <marker id="ab" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="${BLUE}"/></marker>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="${RED}"/></marker>
+    <marker id="ang" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#B8860B"/></marker>
+  </defs>`;
+  function box(id){const e=document.getElementById(id).getBoundingClientRect();
+    return{x:e.left-fr.left,y:e.top-fr.top,w:e.width,h:e.height,cx:e.left-fr.left+e.width/2,cy:e.top-fr.top+e.height/2};}
+  function path(d,color){const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',color);p.setAttribute('stroke-width','1.8');
+    p.setAttribute('marker-end',color===BLUE?'url(#ab)':'url(#ar)');svg.appendChild(p);}
+  function lbl(id,x,y,tx,color){ensureLabel(id,x,y,tx,color);}
+  EDGES.forEach(([a,b,ty,label,opts])=>{
+    const s=box(a),t=box(b),id=a+'_'+b;
+    if(ty==='f'||ty==='fd'){
+      const color=ty==='fd'?RED:BLUE;
+      if(opts&&opts.fromSide==='left'){
+        const lx=s.x,ly=s.cy,tx0=t.cx,tt=t.y;
+        path(`M${lx},${ly} L${tx0},${ly} L${tx0},${tt-2}`,color);
+        if(label) lbl(id,lx-38,ly-6,label,color);
+        return;
+      }
+      const sx=s.cx,sy=s.y+s.h,ty2=t.y;
+      const dir=s.cx<t.cx-8?-1:(s.cx>t.cx+8?1:0);
+      const tx=t.cx+dir*Math.min(16,t.w/3);
+      const my=Math.max(sy+14,ty2-24);
+      const d=Math.abs(sx-tx)<1?`M${sx},${sy} L${tx},${ty2-2}`:`M${sx},${sy} L${sx},${my} L${tx},${my} L${tx},${ty2-2}`;
+      path(d,color);
+      if(label) lbl(id,sx+6,ty==='fd'?sy+24:sy+4,label,color);
+    }else if(ty==='loop'){
+      const chan=s.x-30, top=s.y-16;
+      path(`M${s.x},${s.cy} L${chan},${s.cy} L${chan},${top} L${s.cx},${top} L${s.cx},${s.y-2}`,RED);
+      if(label) lbl(id,chan-26,s.cy-9,label,RED);
+    }else if(ty==='note'){
+      const GOLD='#B8860B',chx=632,topy=54;
+      const sx=s.x+s.w,sy=s.cy,tcx=t.cx,ttop=t.y;
+      const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d',`M${sx},${sy} L${chx},${sy} L${chx},${topy} L${tcx},${topy} L${tcx},${ttop-2}`);
+      p.setAttribute('fill','none');p.setAttribute('stroke',GOLD);p.setAttribute('stroke-width','1.6');
+      p.setAttribute('stroke-dasharray','7 4');p.setAttribute('marker-end','url(#ang)');svg.appendChild(p);
+      if(label) lbl(id,486,300,label,GOLD);
+    }else{
+      const chan=Math.max(6,Math.min(s.x,t.x)-16);
+      const sy=s.cy,tyc=t.cy;
+      path(`M${s.x},${sy} L${chan},${sy} L${chan},${tyc} L${t.x+2},${tyc}`,RED);
+      if(label) lbl(id,chan+4,sy-16,label,RED);
+    }
+  });
+  flow.appendChild(svg);
+}
+function makeDraggable(el){
+  let sx,sy,ox,oy,drag=false;
+  el.addEventListener('pointerdown',e=>{drag=true;el.setPointerCapture(e.pointerId);
+    sx=e.clientX;sy=e.clientY;ox=parseFloat(el.style.left)||0;oy=parseFloat(el.style.top)||0;e.preventDefault();});
+  el.addEventListener('pointermove',e=>{if(!drag)return;
+    el.style.left=(ox+e.clientX-sx)+'px';el.style.top=(oy+e.clientY-sy)+'px';el.dataset.moved='1';});
+  const stop=e=>{if(drag){drag=false;try{el.releasePointerCapture(e.pointerId);}catch(_){}}};
+  el.addEventListener('pointerup',stop);el.addEventListener('pointercancel',stop);
+}
+function ensureLabel(id,x,y,tx,color){
+  let el=document.getElementById('lb_'+id);
+  if(!el){el=document.createElement('div');el.id='lb_'+id;el.className='wlabel';
+    el.textContent=tx;el.style.color=color;el.dataset.moved='0';makeDraggable(el);flow.appendChild(el);}
+  if(el.dataset.moved!=='1'){el.style.left=x+'px';el.style.top=y+'px';}
+}
+function downloadEdited(){
+  const o=flow.querySelector('svg.wire');if(o)o.remove();
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='Quy-trinh-RND-Flowchart-da-sua.html';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(draw,50);
+}
+let _t;
+flow.addEventListener('input',()=>{clearTimeout(_t);_t=setTimeout(draw,500);});
+window.addEventListener('load',()=>setTimeout(draw,80));
+window.addEventListener('resize',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
+</script>
+
+
+</body></html>
