@@ -285,6 +285,12 @@ let _t;
 flow.addEventListener('input',()=>{clearTimeout(_t);_t=setTimeout(draw,500);});
 window.addEventListener('load',()=>setTimeout(draw,80));
 window.addEventListener('resize',()=>{clearTimeout(_t);_t=setTimeout(draw,200);});
+/* Trên web (không phải file:// mở trong máy) → ẩn thanh công cụ + khoá đọc cho gọn.
+   Mở file trong máy (file://) vẫn hiện thanh để chị Vân tự sửa. */
+if(location.protocol!=='file:'){
+  var _bar=document.querySelector('.bar'); if(_bar)_bar.style.display='none';
+  document.querySelectorAll('[contenteditable]').forEach(function(e){e.removeAttribute('contenteditable');});
+}
 </script>
 
 
