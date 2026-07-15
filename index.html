@@ -231,7 +231,8 @@ function draw(){
         return;
       }
       const sx=s.cx,sy=s.y+s.h,ty2=t.y;
-      const dir=s.cx<t.cx-8?-1:(s.cx>t.cx+8?1:0);
+      const tIsDia=!!document.querySelector('#'+b+' .dia');
+      const dir=tIsDia?0:(s.cx<t.cx-8?-1:(s.cx>t.cx+8?1:0));
       const tx=t.cx+dir*Math.min(16,t.w/3);
       const my=Math.max(sy+14,ty2-24);
       const d=Math.abs(sx-tx)<1?`M${sx},${sy} L${tx},${ty2-2}`:`M${sx},${sy} L${sx},${my} L${tx},${my} L${tx},${ty2-2}`;
