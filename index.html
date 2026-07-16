@@ -207,7 +207,7 @@ flow.dataset.built='1';
 const BLUE='#2E86C1',RED='#C22620';
 const EDGES=[
  ['n1','n2','f'],['n2','n3','f'],
- ['n3','n41','f','Yes',{labelAtBend:true}],['n3','n42m','f'],['n41','n42lead','h'],['n42lead','n42','f'],['n42m','n42','h'],
+ ['n3','n41','f','Yes',{labelAtBend:true}],['n3','n42m','f'],['n41','n42lead','h'],['n42lead','n42','f'],['n42m','n42','dh'],
  ['n42','n5','f'],['n41','n51','f'],['n51','n5','h'],
  ['n5','n6','f'],
  ['n6','n7','f','Yes',{labelAtBend:true}],['n6','n72','f'],['n72','n9','f'],
@@ -271,6 +271,12 @@ function draw(){
         :`M${sx},${sy} L${(sx+tx)/2},${sy} L${(sx+tx)/2},${tyc} L${ex},${tyc}`;
       path(d,BLUE);
       if(label) lbl(id,(sx+tx)/2-10,sy-6,label,BLUE);
+    }else if(ty==='dh'){
+      const sx=s.cx, sy=s.y+s.h, tyc=t.cy;
+      const rtl=s.cx>t.cx;
+      const tx=rtl?t.x+t.w:t.x, ex=rtl?tx+2:tx-2;
+      path(`M${sx},${sy} L${sx},${tyc} L${ex},${tyc}`,BLUE);
+      if(label) lbl(id,sx+6,sy+16,label,BLUE);
     }else if(ty==='loop'){
       const chan=s.x-30, top=s.y-16;
       path(`M${s.x},${s.cy} L${chan},${s.cy} L${chan},${top} L${s.cx},${top} L${s.cx},${s.y-2}`,RED);
