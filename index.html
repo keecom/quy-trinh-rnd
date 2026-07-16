@@ -189,7 +189,7 @@ const BLUE='#2E86C1',RED='#C22620';
 const EDGES=[
  ['n1','n2','f'],['n2','n3','f'],
  ['n3','n41','f','Yes',{labelAtBend:true}],['n3','n42','f'],
- ['n42','n5','f'],['n41','n51','f'],['n51','n5','f'],
+ ['n42','n5','f'],['n41','n51','f'],['n51','n5','h'],
  ['n5','n6','f'],
  ['n6','n7','f','Yes',{labelAtBend:true}],['n6','n72','f'],['n72','n9','f'],
  ['n7','n8','f'],
@@ -244,6 +244,12 @@ function draw(){
       const d=Math.abs(sx-tx)<1?`M${sx},${sy} L${tx},${ty2-2}`:`M${sx},${sy} L${sx},${my} L${tx},${my} L${tx},${ty2-2}`;
       path(d,color);
       if(label) lbl(id,sx+6,(opts&&opts.labelAtBend)?my-8:(ty==='fd'?sy+24:sy+4),label,color);
+    }else if(ty==='h'){
+      const sx=s.x+s.w,tx=t.x,sy=s.cy,tyc=t.cy;
+      const d=Math.abs(sy-tyc)<3?`M${sx},${sy} L${tx-2},${sy}`
+        :`M${sx},${sy} L${(sx+tx)/2},${sy} L${(sx+tx)/2},${tyc} L${tx-2},${tyc}`;
+      path(d,BLUE);
+      if(label) lbl(id,(sx+tx)/2-10,sy-6,label,BLUE);
     }else if(ty==='loop'){
       const chan=s.x-30, top=s.y-16;
       path(`M${s.x},${s.cy} L${chan},${s.cy} L${chan},${top} L${s.cx},${top} L${s.cx},${s.y-2}`,RED);
