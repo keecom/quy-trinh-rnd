@@ -331,6 +331,9 @@ if(location.protocol!=='file:'){
 
 /* in nghiêng các đoạn Lưu ý / Ghi chú */
 document.querySelectorAll('.mota,.tg,.bm').forEach(function(el){if(el.dataset.notesStyled)return;el.dataset.notesStyled='1';el.innerHTML=el.innerHTML.replace(/((?:<(?:i|b|span)[^>]*>)*\s*(?:Lưu ý|Ghi chú|Lời khuyên)[\s\S]*?)(?=<br|<\/div>|<\/p>|$)/gi,function(m){if(m.indexOf('data-nored')>-1)return m;return '<span style="font-style:italic;color:#C22620">'+m+'</span>';});});
+/* gạch chân nhãn Lưu ý / Ghi chú */
+document.querySelectorAll('.mota,.tg,.bm').forEach(function(el){if(el.dataset.labelU)return;el.dataset.labelU='1';var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),ns=[];while(w.nextNode())ns.push(w.currentNode);ns.forEach(function(n){var m=(n.nodeValue||'').match(/^(\s*)(Lưu ý|Ghi chú)(:?)/);if(!m)return;var rest=n.nodeValue.slice(m[0].length);var fr=document.createDocumentFragment();if(m[1])fr.appendChild(document.createTextNode(m[1]));var u=document.createElement('u');u.textContent=m[2]+m[3];fr.appendChild(u);if(rest)fr.appendChild(document.createTextNode(rest));n.parentNode.replaceChild(fr,n);});});
+
 </script>
 
 
