@@ -296,7 +296,7 @@ if(location.protocol!=='file:'){
 }
 
 /* in nghiêng các đoạn Lưu ý / Ghi chú */
-[...document.querySelectorAll('.mota *,.tg,.tg *,.bm *')].forEach(function(el){var t=(el.textContent||'').replace(/ /g,' ').replace(/^\s+/,'');if(/^(Lưu ý|Ghi chú)/i.test(t))el.style.fontStyle='italic';});
+[...document.querySelectorAll('.mota *,.tg,.tg *,.bm *')].forEach(function(el){var t=(el.textContent||'').replace(/ /g,' ').replace(/^\s+/,'');if(/^(Lưu ý|Ghi chú)/i.test(t)){el.style.fontStyle='italic';el.style.color='#C22620';}});
 </script>
 
 
