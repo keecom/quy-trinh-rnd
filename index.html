@@ -72,6 +72,13 @@ svg.wire{position:absolute;top:0;left:0;z-index:1;pointer-events:none;overflow:v
 #n3{width:180px;height:178px}
 #n3 .dia{width:126px;height:126px}
 #n3 span{width:114px;line-height:1.25}
+
+.gloss{border-collapse:collapse;width:100%;margin:2px 2px 6px;font-size:12.4px}
+.gloss th{background:var(--cream);font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:11.5px;letter-spacing:.06em;text-align:left;padding:9px 12px;border:1px solid var(--orange);color:var(--ink)}
+.gloss td{padding:9px 12px;border:1px solid var(--line);color:var(--gray);line-height:1.5;vertical-align:top}
+.gloss td:first-child{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;color:var(--ink);width:210px}
+.gloss tr:nth-child(even) td{background:#FCFAF4}
+.gloss td b{color:var(--red)}
 </style>
 </head>
 <body>
@@ -105,12 +112,13 @@ svg.wire{position:absolute;top:0;left:0;z-index:1;pointer-events:none;overflow:v
 </div>
 
 <div class="luuy-h">Thống nhất <span>tên gọi / thuật ngữ</span></div>
-<div class="prin">
-  <div class="pr"><h3>File "Quản lý CV RND"</h3><p>Cả hệ thống các bảng quản lý CV RND.</p></div>
-  <div class="pr"><h3>Bảng "Nghiên cứu sản phẩm"</h3><p>Bảng điền <b>tên – link nghiên cứu</b> của sản phẩm mà BT đề xuất hoặc được giao để phân tích nhằm đưa ra sản phẩm mới.</p></div>
-  <div class="pr"><h3>Bảng "Qly quy trình RND"</h3><p>Bảng quản lý <b>mọi thông tin về công việc và tiến độ</b> của sản phẩm từ lúc được duyệt test tới lúc hoàn thành.</p></div>
-  <div class="pr"><h3>Bảng "Xin quyền tác giả"</h3><p>Bảng <b>TK và BT</b> điền các thông tin xin bản quyền tác giả khi đã hoàn thành sản phẩm.</p></div>
-</div>
+<table class="gloss">
+<tr><th>Tên gọi</th><th>Là gì</th></tr>
+<tr><td>File "Quản lý CV RND"</td><td>Cả hệ thống các bảng quản lý CV RND.</td></tr>
+<tr><td>Bảng "Nghiên cứu sản phẩm"</td><td>Bảng điền <b>tên – link nghiên cứu</b> của sản phẩm mà BT đề xuất hoặc được giao để phân tích nhằm đưa ra sản phẩm mới.</td></tr>
+<tr><td>Bảng "Qly quy trình RND"</td><td>Bảng quản lý <b>mọi thông tin về công việc và tiến độ</b> của sản phẩm từ lúc được duyệt test tới lúc hoàn thành.</td></tr>
+<tr><td>Bảng "Xin quyền tác giả"</td><td>Bảng <b>TK và BT</b> điền các thông tin xin bản quyền tác giả khi đã hoàn thành sản phẩm.</td></tr>
+</table>
 
 <div class="luuy-h">Lưu ý <span>quan trọng</span></div>
 <div class="prin">
