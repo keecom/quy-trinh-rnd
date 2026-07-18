@@ -78,7 +78,9 @@ svg.wire{position:absolute;top:0;left:0;z-index:1;pointer-events:none;overflow:v
 .gloss{border-collapse:collapse;width:100%;margin:2px 2px 6px;font-size:12.4px}
 .gloss th{background:var(--cream);font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:11.5px;letter-spacing:.06em;text-align:left;padding:9px 12px;border:1px solid var(--orange);color:var(--ink)}
 .gloss td{padding:9px 12px;border:1px solid var(--line);color:var(--gray);line-height:1.5;vertical-align:top}
-.gloss td:first-child{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;color:var(--ink);width:210px}
+.gloss td:first-child{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;color:var(--ink);width:190px}
+.gloss td:nth-child(2){width:44%}
+.gloss td.qh{color:var(--gray);font-style:italic}
 .gloss tr:nth-child(even) td{background:#FCFAF4}
 .gloss td b{color:var(--red)}
 .gloss td.gnote{font-style:italic;color:var(--red);background:#FFF9F5}
@@ -117,12 +119,12 @@ svg.wire{position:absolute;top:0;left:0;z-index:1;pointer-events:none;overflow:v
 
 <div class="luuy-h">Thống nhất <span>tên gọi / thuật ngữ</span></div>
 <table class="gloss">
-<tr><th>Tên gọi</th><th>Là gì</th></tr>
-<tr><td>File "Quản lý CV RND"</td><td>Cả hệ thống các bảng quản lý CV RND.</td></tr>
-<tr><td>Bảng "Nghiên cứu sản phẩm"</td><td>Bảng điền <b>tên – link nghiên cứu</b> của sản phẩm mà BT đề xuất hoặc được giao để phân tích nhằm đưa ra sản phẩm mới.</td></tr><tr><td>Bảng "Thông tin sản phẩm"</td><td>Bảng chứa các <b>thông tin chung về các sản phẩm đã triển khai</b> ở công ty.</td></tr>
-<tr><td>Bảng "Qly quy trình RND"</td><td>Bảng quản lý <b>mọi thông tin về công việc và tiến độ</b> của sản phẩm từ lúc được duyệt test tới lúc hoàn thành.</td></tr>
-<tr><td>Bảng "Xin quyền tác giả"</td><td>Bảng <b>TK và BT</b> điền các thông tin xin bản quyền tác giả khi đã hoàn thành sản phẩm.</td></tr><tr><td>Bảng "Order công việc TK"</td><td>Bảng để các phòng ban <b>order các công việc liên quan đến thiết kế nằm ngoài luồng</b> quy trình RND, như: sửa ladi sau khi chạy, order TK sửa tái bản, làm bộ ảnh sàn TMĐT, ảnh TTNB…</td></tr>
-<tr><td colspan="2" class="gnote">Ghi chú: Trong quá trình làm việc và sử dụng bảng quản lý CV, nếu nhân sự chưa được cấp đầy đủ quyền sử dụng trong phạm vi CV cho phép hoặc phát hiện những điểm chưa được tối ưu → Báo với người chuyên trách (HCNS) để được tiếp nhận xử lý.</td></tr>
+<tr><th>Tên gọi</th><th>Là gì</th><th>Quyền hạn theo phòng ban / vị trí</th></tr>
+<tr><td>File "Quản lý CV RND"</td><td>Cả hệ thống các bảng quản lý CV RND.</td><td class="qh" contenteditable="true"></td></tr>
+<tr><td>Bảng "Nghiên cứu sản phẩm"</td><td>Bảng điền <b>tên – link nghiên cứu</b> của sản phẩm mà BT đề xuất hoặc được giao để phân tích nhằm đưa ra sản phẩm mới.</td><td class="qh" contenteditable="true"></td></tr><tr><td>Bảng "Thông tin sản phẩm"</td><td>Bảng chứa các <b>thông tin chung về các sản phẩm đã triển khai</b> ở công ty.</td><td class="qh" contenteditable="true"></td></tr>
+<tr><td>Bảng "Qly quy trình RND"</td><td>Bảng quản lý <b>mọi thông tin về công việc và tiến độ</b> của sản phẩm từ lúc được duyệt test tới lúc hoàn thành.</td><td class="qh" contenteditable="true"></td></tr>
+<tr><td>Bảng "Xin quyền tác giả"</td><td>Bảng <b>TK và BT</b> điền các thông tin xin bản quyền tác giả khi đã hoàn thành sản phẩm.</td><td class="qh" contenteditable="true"></td></tr><tr><td>Bảng "Order công việc TK"</td><td>Bảng để các phòng ban <b>order các công việc liên quan đến thiết kế nằm ngoài luồng</b> quy trình RND, như: sửa ladi sau khi chạy, order TK sửa tái bản, làm bộ ảnh sàn TMĐT, ảnh TTNB…</td><td class="qh" contenteditable="true"></td></tr>
+<tr><td colspan="3" class="gnote">Ghi chú: Trong quá trình làm việc và sử dụng bảng quản lý CV, nếu nhân sự chưa được cấp đầy đủ quyền sử dụng trong phạm vi CV cho phép hoặc phát hiện những điểm chưa được tối ưu → Báo với người chuyên trách (HCNS) để được tiếp nhận xử lý.</td></tr>
 </table>
 
 <div class="luuy-h">Lưu ý <span>quan trọng</span></div>
